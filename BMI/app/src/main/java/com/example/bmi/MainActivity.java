@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        EditText.edtHeight = (EditText) findViewById(R.id.edtHeight);
-        EditText.edtWeight = (EditText) findViewById(R.id.edtWeight);
+        EditText edtHeight = (EditText) findViewById(R.id.edtHeight);
+        EditText edtWeight = (EditText) findViewById(R.id.edtWeight);
         if(v.getId() == R.id.btnCalc){
-            double height = Double.parseDouble(edtHeight.geText().toString());
-            double weight = Double.parseDouble(edtWeight.geText().toString());
+            double height = Double.parseDouble(edtHeight.getText().toString());
+            double weight = Double.parseDouble(edtWeight.getText().toString());
             double bmi = weight / Math.pow(height/100.0,2);
             if(bmi>=24)
                 txvshow.setTextColor(Color.RED);
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else
                 txvshow.setTextColor(Color.GREEN);
 
-            txvshow.setText(String.format("%.2f"),bmi);
+            txvshow.setText(String.format("%.2f",bmi));
         }
         else {
             edtHeight.setText("0");
