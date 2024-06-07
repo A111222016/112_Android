@@ -1,7 +1,11 @@
 package com.example.explictintentdemo2;
 
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,5 +38,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,1);
             }
         });
+        class ResultContract extends ActivityResultContract<Boolean,String>{
+
+            @NonNull
+            @Override
+            public Intent createIntent(@NonNull Context context, Boolean aBoolean) {
+                Intent intent = new Intent(MainActivity.this, OpActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("OPERANDO1",((EditText)findViewById(R.id.txtOpd1)).getText().toString());
+                bundle.putString("OPERANDO2",((EditText)findViewById(R.id.txtOpd2)).getText().toString());
+                intent.putExtras(bundle);
+                return null;
+            }
+
+            @Override
+            public String parseResult(int i, @Nullable Intent intent) {
+                Bundle bundle = intent.getExtras();
+                Double result = bundle.getDouble("RESULT");
+                return null;
+            }
+        }
     }
 }
